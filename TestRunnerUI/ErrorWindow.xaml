@@ -1,0 +1,18 @@
+﻿<Window x:Class="TestRunnerUI.ErrorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TestRunnerUI"
+        mc:Ignorable="d"
+        Title="Error" Height="630.521" Width="740.72">
+    <Grid>
+        <DockPanel Margin="20,60,20,60" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <TextBox x:Name="txtException" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="15" Margin="0,0,0,0" TextWrapping="Wrap" AcceptsReturn="True" IsEnabled="True" KeyDown="txtException_KeyDown" />
+        </DockPanel>
+        <Label x:Name="lblError" Content="One or more test steps have failed:" FontSize="25" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Width="564"/>
+
+        <Button x:Name="btnCopyToClipboard" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" FontSize="20" Content="Copy to clipboard" Margin="83,462,102,7" Click="button_Click" />
+
+    </Grid>
+</Window>
