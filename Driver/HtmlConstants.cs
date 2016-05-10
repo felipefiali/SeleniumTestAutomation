@@ -1,7 +1,9 @@
 ﻿namespace Driver
 {
-    internal class HtmlConstants
+    public class HtmlConstants
     {
-        internal const string SourceAttribute = "src";
+        public const string SourceAttribute = "src";
+
+        public const string ImageTagName = "img";
     }
 }

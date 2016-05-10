@@ -9,17 +9,17 @@
     {
         private AssertElementNotPresent AssertElementNotPresentStep { get; set; }
 
-        public AssertElementNotPresentRunner(AssertElementNotPresent step)
-            : base(step)
+        public AssertElementNotPresentRunner(AssertElementNotPresent step, Driver driver)
+            : base(step, driver)
         {
             AssertElementNotPresentStep = step;
         }
 
-        public override IStepResult Run(Driver driver)
+        public override IStepResult Run()
         {
             try
             {
-                if (driver.CanFindElement(AssertElementNotPresentStep.ElementCssPath, AssertElementNotPresentStep.ElementHint))
+                if (Driver.CanFindElement(AssertElementNotPresentStep.ElementCssPath, AssertElementNotPresentStep.ElementHint))
                 {
                     StepResult.Exception = HandleException(string.Format("The element ({0}) should not be present on the supplied CSS path ({1})", AssertElementNotPresentStep.ElementHint, AssertElementNotPresentStep.ElementCssPath), FailureType.ElementShouldNotBePresent); 
                 }

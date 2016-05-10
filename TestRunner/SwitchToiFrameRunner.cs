@@ -11,17 +11,17 @@
     {
         private SwitchToiFrame SwitchToIframeStep { get; set; }
 
-        public SwitchToiFrameRunner(SwitchToiFrame step)
-            : base(step)
+        public SwitchToiFrameRunner(SwitchToiFrame step, Driver driver)
+            : base(step, driver)
         {
             SwitchToIframeStep = step;
         }
 
-        public override IStepResult Run(Driver driver)
+        public override IStepResult Run()
         {
             try
             {
-                driver.SwitchToiFrame(SwitchToIframeStep.iFrameCssPath, SwitchToIframeStep.ElementHint);
+                Driver.SwitchToiFrame(SwitchToIframeStep.iFrameCssPath, SwitchToIframeStep.ElementHint);
             }
             catch (Exception ex)
             {
@@ -30,21 +30,21 @@
 
             if (StepResult.IsSuccessful())
             {
-                ExecuteSubSteps(driver);
+                ExecuteSubSteps();
 
-                driver.SwitchToDefaultContent();
+                Driver.SwitchToDefaultContent();
             }
 
             return StepResult;
         }
 
-        private IStepResult ExecuteSubSteps(Driver driver)
+        private IStepResult ExecuteSubSteps()
         {
             try
             {
                 foreach (var step in GetOrderedSteps())
                 {
-                    var SubStepResult = StepRunnerFactory.Construct(step).Run(driver);
+                    var SubStepResult = StepRunnerFactory.Construct(step, Driver).Run();
 
                     if (!SubStepResult.IsSuccessful() && StepResult.Exception == null)
                     {

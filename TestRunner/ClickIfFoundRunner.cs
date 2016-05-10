@@ -9,17 +9,17 @@
     {
         private ClickIfFound ClickIfFoundStep { get; set; }
 
-        public ClickIfFoundRunner(ClickIfFound step)
-            : base(step)
+        public ClickIfFoundRunner(ClickIfFound step, Driver driver)
+            : base(step, driver)
         {
             ClickIfFoundStep = step;
         }
 
-        public override IStepResult Run(Driver driver)
+        public override IStepResult Run()
         {
             try
             {
-                driver.ClickIfElementIsFound(ClickIfFoundStep.LinkCssPath, ClickIfFoundStep.ElementHint);
+                Driver.ClickIfElementIsFound(ClickIfFoundStep.LinkCssPath, ClickIfFoundStep.ElementHint);
             }
             catch (Exception ex)
             {

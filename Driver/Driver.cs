@@ -18,7 +18,7 @@
             get
             {
 #if DEBUG
-    return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Driver\Drivers");
+                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\Driver\Drivers");
 #else
     return "Drivers";
 #endif
@@ -29,12 +29,12 @@
         {
             ChromeDriver = new ChromeDriver(DriverPath);
             ChromeDriver.Manage().Window.Maximize();
-        }        
+        }
 
         public void Navigate(string url)
         {
             ChromeDriver.Navigate().GoToUrl(url);
-        }      
+        }
 
         public string GetValueInElement(string elementCssPath, string elementFriendlyName)
         {
@@ -48,8 +48,8 @@
             var element = FindElement(elementCssPath, elementFriendlyName);
 
             ClickElement(element);
-        }    
-        
+        }
+
         public void ClickIfElementIsFound(string elementCssPath, string elementFriendlyName)
         {
             var element = TryFindElement(elementCssPath);
@@ -59,7 +59,7 @@
                 ClickElement(element);
             }
         }
-        
+
         public void TypeText(string elementCssPath, string elementFriendlyName, string text)
         {
             var element = FindElement(elementCssPath, elementFriendlyName);
@@ -131,6 +131,13 @@
             return DownloadImageDataFromUrl(imageUrl);
         }
 
+        public string GetElementTagName(string elementCssPath, string elementFriendlyName)
+        {
+            var element = FindElement(elementCssPath, elementFriendlyName);
+
+            return element.TagName;
+        }
+
         private byte[] DownloadImageDataFromUrl(string imageUrl)
         {
             byte[] imageData = null;
@@ -151,7 +158,14 @@
 
         private string GetElementAttribute(string elementCssPath, string elementFriendlyName, string attributeName)
         {
-            return FindElement(elementCssPath, elementFriendlyName).GetAttribute(attributeName);
+            var attribute = FindElement(elementCssPath, elementFriendlyName).GetAttribute(attributeName);
+
+            if (string.IsNullOrEmpty(attribute))
+            {
+                throw new Exception(string.Format("Could not find attribute {0} on element {1}. (CSS Path: {2})", attributeName, elementFriendlyName, elementCssPath));
+            }
+
+            return attribute;
         }
 
         /// <summary>
@@ -169,15 +183,15 @@
             {
                 var webDriverWait = new WebDriverWait(ChromeDriver, TimeSpan.FromSeconds(5));
 
-                element = webDriverWait.Until(ChromeDriver => ChromeDriver.FindElement(By.CssSelector(cssPath)));                
-            }            
+                element = webDriverWait.Until(ChromeDriver => ChromeDriver.FindElement(By.CssSelector(cssPath)));
+            }
             catch (NoSuchElementException noSuchElementException)
             {
-                ThrowElementNotFoundException(cssPath, elementFriendlyName, noSuchElementException);                
+                ThrowElementNotFoundException(cssPath, elementFriendlyName, noSuchElementException);
             }
             catch (WebDriverTimeoutException webDriverTimeoutException)
             {
-                ThrowElementNotFoundException(cssPath, elementFriendlyName, webDriverTimeoutException);                
+                ThrowElementNotFoundException(cssPath, elementFriendlyName, webDriverTimeoutException);
             }
 
             return element;
@@ -242,8 +256,8 @@
         }
 
         public void Dispose()
-        {            
-            Dispose(true);         
+        {
+            Dispose(true);
         }
         #endregion
     }

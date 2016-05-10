@@ -10,13 +10,13 @@
     {
         private Wait WaitStep { get; set; }
 
-        public WaitRunner(Wait step)
-            : base(step)
+        public WaitRunner(Wait step, Driver driver)
+            : base(step, driver)
         {
             WaitStep = step;
         }
 
-        public override IStepResult Run(Driver driver)
+        public override IStepResult Run()
         {
             Thread.Sleep(TimeSpan.FromSeconds(WaitStep.Seconds));
 

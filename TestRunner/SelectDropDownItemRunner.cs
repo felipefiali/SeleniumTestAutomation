@@ -9,17 +9,17 @@
     {
         private SelectDropDownItem SelectDropDownItemStep { get; set; }
 
-        public SelectDropDownItemRunner(SelectDropDownItem step)
-            : base(step)
+        public SelectDropDownItemRunner(SelectDropDownItem step, Driver driver)
+            : base(step, driver)
         {
             SelectDropDownItemStep = step;
         }
 
-        public override IStepResult Run(Driver driver)
+        public override IStepResult Run()
         {
             try
             {
-                driver.SelectDropDownItem(SelectDropDownItemStep.ElementCssPath, SelectDropDownItemStep.ElementHint, SelectDropDownItemStep.ItemText);
+                Driver.SelectDropDownItem(SelectDropDownItemStep.ElementCssPath, SelectDropDownItemStep.ElementHint, SelectDropDownItemStep.ItemText);
             }
             catch (Exception ex)
             {

@@ -27,6 +27,9 @@
                 case FailureType.ImageComparison:
                     return new ImageComparisonException(message, innerException);
 
+                case FailureType.StepValidation:
+                    return new StepValidationException(message, innerException);
+
                 default:
                     throw new Exception(string.Format("Could not create TestStepExecutionException for failure type {0}", failureType));
             }

@@ -9,17 +9,17 @@
     {
         private AssertValue AssertValueStep { get; set; }
 
-        public AssertValueRunner(AssertValue step)
-            : base(step)
+        public AssertValueRunner(AssertValue step, Driver driver)
+            : base(step, driver)
         {
             AssertValueStep = step;
         }
 
-        public override IStepResult Run(Driver driver)
+        public override IStepResult Run()
         {
             try
             {
-                var elementValue = driver.GetValueInElement(AssertValueStep.ElementCssPath, AssertValueStep.ElementHint);
+                var elementValue = Driver.GetValueInElement(AssertValueStep.ElementCssPath, AssertValueStep.ElementHint);
 
                 if (!string.Equals(elementValue, AssertValueStep.ExpectedValue))
                 {

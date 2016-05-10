@@ -7,6 +7,7 @@
         Unknown,
         SubStepFailed,
         ElementShouldNotBePresent,
-        ImageComparison
+        ImageComparison,
+        StepValidation
     }
 }

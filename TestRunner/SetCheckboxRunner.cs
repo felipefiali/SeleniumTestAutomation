@@ -9,17 +9,17 @@
     {
         private SetCheckbox SetCheckboxStep { get; set; }
 
-        public SetCheckboxRunner(SetCheckbox step)
-            : base(step)
+        public SetCheckboxRunner(SetCheckbox step, Driver driver)
+            : base(step, driver)
         {
             SetCheckboxStep = step;
         }
 
-        public override IStepResult Run(Driver driver)
+        public override IStepResult Run()
         {
             try
             {
-                driver.SetCheckbox(SetCheckboxStep.ElementCssPath, SetCheckboxStep.ElementHint, SetCheckboxStep.Checked);
+                Driver.SetCheckbox(SetCheckboxStep.ElementCssPath, SetCheckboxStep.ElementHint, SetCheckboxStep.Checked);
             }
             catch (Exception ex)
             {

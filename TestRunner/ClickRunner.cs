@@ -9,17 +9,17 @@
     {
         private Click ClickStep { get; set; }
 
-        public ClickRunner(Click step)
-            : base(step)
+        public ClickRunner(Click step, Driver driver)
+            : base(step, driver)
         {
             ClickStep = step;
         }
 
-        public override IStepResult Run(Driver driver)
+        public override IStepResult Run()
         {
             try
             {
-                driver.Click(ClickStep.LinkCssPath, ClickStep.ElementHint);
+                Driver.Click(ClickStep.LinkCssPath, ClickStep.ElementHint);
             }
             catch (Exception ex)
             {

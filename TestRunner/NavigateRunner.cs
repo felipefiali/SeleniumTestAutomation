@@ -9,17 +9,17 @@
     {
         private Navigate NavigateStep { get; set; }
 
-        public NavigateRunner(Navigate step)
-            : base(step)
+        public NavigateRunner(Navigate step, Driver driver)
+            : base(step, driver)
         {
             NavigateStep = step;
         }
 
-        public override IStepResult Run(Driver driver)
+        public override IStepResult Run()
         {
             try
             {
-                driver.Navigate(NavigateStep.URL);
+                Driver.Navigate(NavigateStep.URL);
             }
             catch (Exception ex)
             {

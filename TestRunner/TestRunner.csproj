@@ -54,7 +54,9 @@
     <Compile Include="Infrastructure\ImageComparisonException.cs" />
     <Compile Include="Infrastructure\InnerStepFailedException.cs" />
     <Compile Include="Infrastructure\IStepResult.cs" />
+    <Compile Include="Infrastructure\IValidateStepExecution.cs" />
     <Compile Include="Infrastructure\StepRunnerFactory.cs" />
+    <Compile Include="Infrastructure\StepValidationException.cs" />
     <Compile Include="Infrastructure\TestStepExecutionException.cs" />
     <Compile Include="Infrastructure\TestStepExecutionExceptionFactory.cs" />
     <Compile Include="Infrastructure\UnknownFailureException.cs" />

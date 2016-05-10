@@ -28,12 +28,27 @@
         {
             foreach (var step in GetOrderedSteps())
             {
-                var stepResult = StepRunnerFactory.Construct(step).Run(Driver);
+                var stepRunner = StepRunnerFactory.Construct(step, Driver);                
 
-                TestResult.AddStepResult(stepResult);
+                if (stepRunner is IValidateStepExecution)
+                {
+                    if (!ExecuteStepValidation((IValidateStepExecution)stepRunner))
+                    {
+                        TestResult.AddStepResult(stepRunner.GetStepResult());
+
+                        continue;
+                    }
+                }
+
+                TestResult.AddStepResult(stepRunner.Run());
             }
 
             return TestResult;
+        }
+
+        private bool ExecuteStepValidation(IValidateStepExecution stepRunner)
+        {
+            return stepRunner.ValidateExecution();
         }
 
         private IEnumerable<Step> GetOrderedSteps()
@@ -63,8 +78,8 @@
         }
 
         public void Dispose()
-        {            
-            Dispose(true);            
+        {
+            Dispose(true);
         }
         #endregion
     }

@@ -9,12 +9,20 @@
     {   
         protected StepResult StepResult { get; set; }
 
-        public StepRunner(Step step)
+        protected Driver Driver { get; set; }
+
+        public StepRunner(Step step, Driver driver)
         {
             StepResult = new StepResult(step);
+            Driver = driver;
         }
 
-        public abstract IStepResult Run(Driver driver);
+        public abstract IStepResult Run();
+
+        public IStepResult GetStepResult()
+        {
+            return StepResult;
+        }
 
         protected TestStepExecutionException HandleException(Exception ex, FailureType failureType)
         {

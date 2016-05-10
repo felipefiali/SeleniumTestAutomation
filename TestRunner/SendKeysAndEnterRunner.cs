@@ -10,13 +10,13 @@
     {
         private SendKeysAndEnter SendKeysAndEnterStep { get; set; }
 
-        public SendKeysAndEnterRunner(SendKeysAndEnter step)
-            : base(step)
+        public SendKeysAndEnterRunner(SendKeysAndEnter step, Driver driver)
+            : base(step, driver)
         {
             SendKeysAndEnterStep = step;
         }
 
-        public override IStepResult Run(Driver driver)
+        public override IStepResult Run()
         {
             const string EnterKey = "{ENTER}";
 
