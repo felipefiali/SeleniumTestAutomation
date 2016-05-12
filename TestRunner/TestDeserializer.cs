@@ -37,13 +37,14 @@
                 typeof(ClickIfFound),
                 typeof(AssertValue),
                 typeof(Step),
-                typeof(Wait),                
+                typeof(Wait),
                 typeof(SelectDropDownItem),
                 typeof(SwitchToiFrame),
                 typeof(AssertElementNotPresent),
                 typeof(SetCheckbox),
                 typeof(CompareImage),
-                typeof(SendKeysAndEnter)
+                typeof(SendKeysAndEnter),
+                typeof(AssertAttributeValue)
             };
         }
     }

@@ -18,7 +18,7 @@
             }
             else if (step is ClickIfFound)
             {
-                return new ClickIfFoundRunner(step as ClickIfFound, driver);                        
+                return new ClickIfFoundRunner(step as ClickIfFound, driver);
             }
             else if (step is Navigate)
             {
@@ -55,6 +55,10 @@
             else if (step is SendKeysAndEnter)
             {
                 return new SendKeysAndEnterRunner(step as SendKeysAndEnter, driver);
+            }
+            else if (step is AssertAttributeValue)
+            {
+                return new AssertAttributeValueRunner(step as AssertAttributeValue, driver);
             }
             else
             {

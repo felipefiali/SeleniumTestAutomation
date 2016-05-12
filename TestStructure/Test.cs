@@ -20,6 +20,7 @@
         [XmlArrayItem(Type = typeof(SetCheckbox))]
         [XmlArrayItem(Type = typeof(CompareImage))]
         [XmlArrayItem(Type = typeof(SendKeysAndEnter))]
+        [XmlArrayItem(Type = typeof(AssertAttributeValue))]
         public List<Step> Steps { get; set; }
 
         public Test()

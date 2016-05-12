@@ -24,11 +24,16 @@
         [XmlArrayItem(Type = typeof(AssertValue))]
         [XmlArrayItem(Type = typeof(Click))]
         [XmlArrayItem(Type = typeof(ClickIfFound))]
-        [XmlArrayItem(Type = typeof(Navigate))]        
+        [XmlArrayItem(Type = typeof(Navigate))]
         [XmlArrayItem(Type = typeof(TypeText))]
         [XmlArrayItem(Type = typeof(SelectDropDownItem))]
-        [XmlArrayItem(Type = typeof(Wait))]        
+        [XmlArrayItem(Type = typeof(Wait))]
         [XmlArrayItem(Type = typeof(SwitchToiFrame))]
+        [XmlArrayItem(Type = typeof(AssertElementNotPresent))]
+        [XmlArrayItem(Type = typeof(SetCheckbox))]
+        [XmlArrayItem(Type = typeof(CompareImage))]
+        [XmlArrayItem(Type = typeof(SendKeysAndEnter))]
+        [XmlArrayItem(Type = typeof(AssertAttributeValue))]
         public List<Step> Steps { get; set; }       
 
         public void AddStep(Step step)

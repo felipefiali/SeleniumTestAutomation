@@ -126,7 +126,7 @@
 
         public byte[] GetImageDataFromSrcAttribute(string elementCssPath, string elementFriendlyName)
         {
-            var imageUrl = GetElementAttribute(elementCssPath, elementFriendlyName, HtmlConstants.SourceAttribute);
+            var imageUrl = GetElementAttributeValue(elementCssPath, elementFriendlyName, HtmlConstants.SourceAttribute);
 
             return DownloadImageDataFromUrl(imageUrl);
         }
@@ -136,6 +136,18 @@
             var element = FindElement(elementCssPath, elementFriendlyName);
 
             return element.TagName;
+        }
+
+        public string GetElementAttributeValue(string elementCssPath, string elementFriendlyName, string attributeName)
+        {
+            var attribute = FindElement(elementCssPath, elementFriendlyName).GetAttribute(attributeName);
+
+            if (string.IsNullOrEmpty(attribute))
+            {
+                throw new Exception(string.Format("Could not find attribute {0} on element {1}. (CSS Path: {2})", attributeName, elementFriendlyName, elementCssPath));
+            }
+
+            return attribute;
         }
 
         private byte[] DownloadImageDataFromUrl(string imageUrl)
@@ -156,18 +168,6 @@
             return imageData;
         }
 
-        private string GetElementAttribute(string elementCssPath, string elementFriendlyName, string attributeName)
-        {
-            var attribute = FindElement(elementCssPath, elementFriendlyName).GetAttribute(attributeName);
-
-            if (string.IsNullOrEmpty(attribute))
-            {
-                throw new Exception(string.Format("Could not find attribute {0} on element {1}. (CSS Path: {2})", attributeName, elementFriendlyName, elementCssPath));
-            }
-
-            return attribute;
-        }
-
         /// <summary>
         /// Tries to find the HTML element given its CSS path.
         /// </summary>
@@ -183,7 +183,7 @@
             {
                 var webDriverWait = new WebDriverWait(ChromeDriver, TimeSpan.FromSeconds(5));
 
-                element = webDriverWait.Until(ChromeDriver => ChromeDriver.FindElement(By.CssSelector(cssPath)));
+                element = webDriverWait.Until(driver => ChromeDriver.FindElement(By.CssSelector(cssPath)));
             }
             catch (NoSuchElementException noSuchElementException)
             {
@@ -210,7 +210,7 @@
             {
                 var webDriverWait = new WebDriverWait(ChromeDriver, TimeSpan.FromSeconds(5));
 
-                element = webDriverWait.Until(ChromeDriver => ChromeDriver.FindElement(By.CssSelector(cssPath)));
+                element = webDriverWait.Until(driver => ChromeDriver.FindElement(By.CssSelector(cssPath)));
             }
             catch
             {
